@@ -1,0 +1,94 @@
+/* Estilos para el footer */
+.site-footer {
+    background-color: #ADD8E6; /* Establece el color de fondo del footer */
+    color: #333; /* Establece el color del texto */
+    padding: 40px 20px; /* Agrega relleno */
+    font-size: 0.9rem; /* Establece el tamaño de fuente */
+    position: static; /* Asegura que el footer siga el flujo normal */
+}
+
+.footer-content {
+    display: flex; 
+    justify-content: space-between; /* Distribuye el espacio entre las columnas */
+    max-width: 1200px; 
+    margin: 0 auto; 
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1; /* Permite que las columnas crezcan */
+    min-width: 200px; /* Establece un ancho mínimo */
+    margin-bottom: 20px; /* Agrega margen inferior */
+}
+
+.footer-column h3 {
+    font-size: 1.1rem; /* Establece el tamaño de fuente del título */
+    font-weight: bold; /* Aplica negrita */
+    margin-bottom: 15px; /* Agrega margen inferior */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+}
+
+.footer-column ul {
+    list-style: none; /* Elimina los marcadores de lista */
+    padding: 0; /* Elimina el relleno */
+}
+
+.footer-column ul li {
+    margin-bottom: 10px; /* Agrega margen inferior a los elementos de la lista */
+}
+
+.footer-column ul li a {
+    color: #333; 
+    text-decoration: none; 
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline; 
+}
+
+.footer-bottom {
+    text-align: center; 
+    margin-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1); 
+    padding-top: 20px; 
+}
+
+.footer-bottom p {
+    font-size: 0.85rem; 
+    color: #666; 
+    margin-bottom: 15px; 
+}
+
+.social-icons {
+    display: flex; /* Usa flexbox para alinear los íconos */
+    justify-content: center; /* Centra los íconos */
+    gap: 15px; /* Espacio entre los íconos */
+}
+
+.social-icons a {
+    color: #333; /* Establece el color de los íconos */
+    font-size: 1.2rem; /* Establece el tamaño de fuente */
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+.social-icons .social-icon {
+    width: 24px; /* Establece un tamaño fijo para las imágenes */
+    height: 24px; /* Establece la altura de las imágenes */
+    transition: opacity 0.3s ease; /* Agrega transición para el efecto hover */
+}
+
+.social-icons a:hover .social-icon {
+    opacity: 0.7; /* Reduce la opacidad al pasar el ratón */
+}
+
+/* Estilos responsivos para el footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Apila las columnas verticalmente */
+        align-items: center; /* Centra las columnas */
+    }
+    .footer-column {
+        text-align: center; /* Centra el texto */
+        margin-bottom: 30px; /* Agrega más margen inferior */
+    }
+}

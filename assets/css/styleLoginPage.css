@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    font-family: Arial;
+}
+
+.sign-in-container, .sign-up-container {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    border-radius: 10px;
+}
+
+.sign-in-container .form, .sign-up-container .form {
+    width: 100%;
+    height: 100%;
+}
+
+.sign-up-container {
+    display: none;
+}
+
+.sign-in-container .form form, .sign-up-container .form form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-in-container .form h1, .sign-up-container .form h1 {
+    color: RGB(51, 51, 51);
+    font-size: 30px;
+    margin-bottom: 1px;
+}
+
+.sign-in-container .form span, .sign-up-container .form span {
+    color: RGB(51, 51, 51);
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.sign-in-container .container-input, .sign-up-container .container-input {
+    width: 300px;
+    height: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 0 15px;
+    background-color: #cde9eb;
+}
+
+.sign-in-container .container-input input, .sign-up-container .container-input input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+}
+
+.sign-in-container .form a, .sign-up-container .form a {
+    display: inline;
+    margin-left: 5px;
+    color: #1a1a1a;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sign-in-container .form a:hover, .sign-up-container .form a:hover {
+    text-decoration: underline;
+}
+
+.sign-in-container .boton, .sign-up-container .boton {
+    width: 170px;
+    height: 45px;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+    color: whitesmoke;
+    background-color: #00c4cc;
+}
+
+.sign-in-container .boton:hover, .sign-up-container .boton:hover {
+    background-color: #00a0a6;
+}
+
+.sign-in-container img, .sign-up-container img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: auto;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}

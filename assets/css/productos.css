@@ -1,0 +1,249 @@
+/* Estilos para la cuadrícula de productos */
+.productos-grid {
+    display: grid; /* Usa un diseño de cuadrícula */
+    grid-template-columns: repeat(4, 1fr); /* Crea 4 columnas de igual ancho */
+    gap: 1.5rem; /* Espacio entre los elementos */
+    max-width: 1200px; /* Establece un ancho máximo */
+    margin: 3rem auto 0; /* Centra la cuadrícula con margen superior */
+}
+
+.producto {
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.producto img {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    height: 200px; /* Establece una altura fija para todas las imágenes */
+    object-fit: cover; /* Recorta la imagen para que se ajuste al contenedor */
+    border-radius: 8px; /* Redondea las esquinas */
+    margin-bottom: 0.5rem; /* Agrega margen inferior */
+}
+
+.producto h3 {
+    font-size: 1rem; /* Establece el tamaño de fuente del título */
+    color: #333; /* Establece el color del título */
+    margin-bottom: 0.3rem; /* Agrega margen inferior */
+}
+
+.producto .rating {
+    color: #f5a623; /* Establece el color de la calificación */
+    font-size: 0.9rem; /* Establece el tamaño de fuente */
+    margin-bottom: 0.3rem; /* Agrega margen inferior */
+}
+
+.producto .price {
+    font-size: 1rem; /* Establece el tamaño de fuente del precio */
+    color: #333; /* Establece el color del precio */
+    font-weight: bold; /* Aplica negrita */
+    margin-bottom: 0.3rem; /* Agrega margen inferior */
+}
+
+.producto .price .old-price {
+    color: #999; /* Establece el color del precio anterior */
+    text-decoration: line-through; /* Tacha el precio anterior */
+    font-weight: normal; /* Elimina la negrita */
+    margin-right: 0.5rem; /* Agrega margen a la derecha */
+}
+
+.producto .availability {
+    font-size: 0.85rem; /* Establece el tamaño de fuente de la disponibilidad */
+    color: #666; /* Establece el color del texto */
+}
+
+/* Estilos para el modal */
+.modal-overlay {
+    position: fixed; /* Fija el overlay en la pantalla */
+    top: 0; /* Coloca el overlay en la parte superior */
+    left: 0; /* Coloca el overlay en la parte izquierda */
+    width: 100%; /* Ocupa todo el ancho */
+    height: 100%; /* Ocupa toda la altura */
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 1000; /* Coloca el overlay por encima de otros elementos */
+    opacity: 0; /* Comienza invisible */
+    animation: fadeIn 0.3s ease-in-out forwards; /* Animación de aparición */
+}
+
+.modal {
+    position: fixed; /* Fija el modal en la pantalla */
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición al centro */
+    background: #fff; /* Fondo blanco */
+    border-radius: 10px; /* Redondea las esquinas */
+    z-index: 1001; /* Coloca el modal por encima del overlay */
+    width: 80%; /* Establece el ancho del modal */
+    max-width: 1000px; /* Limita el ancho máximo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Agrega sombra */
+    opacity: 0; /* Comienza invisible */
+    transform: translate(-50%, -50%) scale(0.95); /* Comienza ligeramente más pequeño */
+    animation: fadeInUp 0.3s ease-in-out forwards; /* Animación de aparición */
+}
+
+.modal-content {
+    display: flex; /* Usa flexbox para alinear el contenido */
+    padding: 30px; /* Agrega relleno interno */
+    position: relative; /* Permite posicionar elementos internos */
+}
+
+.modal-left {
+    flex: 1; /* Ocupa el espacio disponible */
+    padding-right: 30px; /* Agrega espacio a la derecha */
+}
+
+.modal-left img {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+    height: 300px; /* Establece una altura fija */
+    object-fit: cover; /* Ajusta la imagen al contenedor */
+    border-radius: 8px; /* Redondea las esquinas */
+}
+
+.modal-right {
+    flex: 1; /* Ocupa el espacio disponible */
+    padding-left: 30px; /* Agrega espacio a la izquierda */
+}
+
+.modal-right h2 {
+    font-size: 1.8rem; /* Establece el tamaño del título */
+    margin-bottom: 15px; /* Agrega margen inferior */
+    color: #333; /* Establece el color del título */
+}
+
+.modal-rating {
+    margin-bottom: 15px; /* Agrega margen inferior */
+}
+
+.modal-rating span {
+    color: #f5a623; /* Establece el color de las estrellas */
+    font-size: 1.4rem; /* Establece el tamaño de las estrellas */
+}
+
+.modal-price {
+    font-size: 1.4rem; /* Establece el tamaño del precio */
+    font-weight: bold; /* Aplica negrita */
+    color: #333; /* Establece el color del precio */
+    margin-bottom: 20px; /* Agrega margen inferior */
+}
+
+.modal-description h3 {
+    font-size: 1.2rem; /* Establece el tamaño del título de la descripción */
+    margin-bottom: 8px; /* Agrega margen inferior */
+    color: #333; /* Establece el color del título */
+}
+
+.modal-description p {
+    font-size: 1rem; /* Establece el tamaño del texto de la descripción */
+    color: #666; /* Establece el color del texto */
+    margin-bottom: 20px; /* Agrega margen inferior */
+}
+
+.modal-options h3 {
+    font-size: 1.2rem; /* Establece el tamaño del título de las opciones */
+    margin-bottom: 8px; /* Agrega margen inferior */
+    color: #333; /* Establece el color del título */
+}
+
+.modal-quantity {
+    width: 80px; /* Establece el ancho del input */
+    padding: 8px; /* Agrega relleno */
+    margin-bottom: 20px; /* Agrega margen inferior */
+    border: 1px solid #ccc; /* Agrega un borde */
+    border-radius: 5px; /* Redondea las esquinas */
+    font-size: 1rem; /* Establece el tamaño de fuente */
+}
+
+.modal-add-to-cart {
+    background: #e91e63; /* Establece el color de fondo del botón */
+    color: #fff; /* Establece el color del texto */
+    padding: 12px 24px; /* Agrega relleno */
+    border: none; /* Elimina el borde */
+    border-radius: 5px; /* Redondea las esquinas */
+    cursor: pointer; /* Cambia el cursor a puntero */
+    font-size: 1.1rem; /* Establece el tamaño de fuente */
+}
+
+.modal-add-to-cart:hover {
+    background: #d81b60; /* Cambia el color de fondo al pasar el ratón */
+}
+
+.modal-close {
+    position: absolute; /* Posiciona la "X" absolutamente */
+    top: 15px; /* Coloca la "X" cerca de la parte superior */
+    right: 20px; /* Coloca la "X" cerca de la parte derecha */
+    font-size: 2rem; /* Establece el tamaño de la "X" */
+    color: #333; /* Establece el color */
+    cursor: pointer; /* Cambia el cursor a puntero */
+}
+
+/* Animaciones para el modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Comienza invisible */
+    }
+    to {
+        opacity: 1; /* Termina completamente visible */
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0; /* Comienza invisible */
+        transform: translate(-50%, -50%) scale(0.95); /* Comienza ligeramente más pequeño */
+    }
+    to {
+        opacity: 1; /* Termina completamente visible */
+        transform: translate(-50%, -50%) scale(1); /* Termina en tamaño normal */
+    }
+}
+
+/* Estilos responsivos para productos y modal */
+@media (max-width: 768px) {
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr); /* Usa 2 columnas en pantallas pequeñas */
+    }
+    .modal {
+        width: 90%; /* Ajusta el ancho del modal */
+        max-width: 500px; /* Limita el ancho máximo */
+    }
+    .modal-content {
+        flex-direction: column; /* Apila el contenido verticalmente */
+        padding: 20px; /* Reduce el relleno */
+    }
+    .modal-left, .modal-right {
+        padding: 0; /* Elimina el relleno */
+    }
+    .modal-left {
+        margin-bottom: 20px; /* Agrega margen inferior */
+    }
+    .modal-right h2 {
+        font-size: 1.5rem; /* Reduce el tamaño del título */
+    }
+    .modal-rating span {
+        font-size: 1.2rem; /* Reduce el tamaño de las estrellas */
+    }
+    .modal-price {
+        font-size: 1.2rem; /* Reduce el tamaño del precio */
+    }
+    .modal-description h3 {
+        font-size: 1.1rem; /* Reduce el tamaño del título de la descripción */
+    }
+    .modal-description p {
+        font-size: 0.9rem; /* Reduce el tamaño del texto de la descripción */
+    }
+    .modal-options h3 {
+        font-size: 1.1rem; /* Reduce el tamaño del título de las opciones */
+    }
+    .modal-quantity {
+        width: 60px; /* Reduce el ancho del input */
+        padding: 5px; /* Reduce el relleno */
+    }
+    .modal-add-to-cart {
+        padding: 10px 20px; /* Reduce el relleno del botón */
+        font-size: 1rem; /* Reduce el tamaño del texto del botón */
+    }
+}
+
+@media (max-width: 480px) {
+    .productos-grid {
+        grid-template-columns: 1fr; /* Usa 1 columna en pantallas muy pequeñas */
+    }
+}

@@ -1,0 +1,244 @@
+/* Estilos para la primera fila del header */
+.header-top {
+    display: flex; /* Usa flexbox para alinear los elementos */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    align-items: center; /* Centra los elementos verticalmente */
+    padding: 0.5rem; /* Agrega relleno */
+    background-color: #fff; /* Establece el color de fondo blanco */
+    border-bottom: 1px solid #e0e0e0; /* Agrega un borde inferior */
+    position: relative; /* Permite posicionar elementos relacionados */
+}
+
+.logo img {
+    height: 3.1rem; /* Ajusta la altura del logo */
+    width: auto; /* Mantiene la proporción del logo */
+}
+
+.search-bar {
+    flex-grow: 1; /* Permite que la barra de búsqueda crezca */
+    margin: 0 2rem; /* Agrega márgenes laterales */
+    display: flex; /* Usa flexbox para alinear input y botón */
+    justify-content: center; /* Centra el contenido */
+    transition: all 0.3s ease;
+}
+
+.search-bar input {
+    width: 60%; /* Establece el ancho del input */
+    padding: 0.5rem; /* Agrega relleno */
+    border: 1px solid #ccc; /* Agrega un borde */
+    border-radius: 4px 0 0 4px; /* Redondea las esquinas izquierdas */
+    outline: none; /* Elimina el contorno al enfocar */
+}
+
+.search-bar button {
+    padding: 0.5rem 1rem; /* Agrega relleno al botón */
+    background-color: #b1fac1; /* Establece el color de fondo */
+    color: rgb(53, 53, 53); /* Establece el color del texto */
+    border: none; /* Elimina el borde */
+    border-radius: 0 4px 4px 0; /* Redondea las esquinas derechas */
+    cursor: pointer; /* Cambia el cursor a puntero */
+}
+
+.search-bar button:hover {
+    background-color: #b1fac1; /* Cambia el color de fondo al pasar el ratón */
+}
+
+.user-actions {
+    display: flex; /* Usa flexbox para alinear los enlaces */
+    gap: 0.5rem; /* Espacio entre los enlaces */
+    align-items: center; /* Centra los elementos verticalmente */
+}
+
+.user-actions a {
+    text-decoration: none; /* Elimina el subrayado */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    flex-direction: column; /* Organiza en columna */
+    align-items: center; /* Centra el contenido */
+    gap: 0.2rem; /* Espacio entre imagen y texto */
+}
+
+.user-actions img {
+    height: 24px; /* Ajusta la altura de los íconos */
+    width: auto; /* Mantiene la proporción */
+}
+
+.user-actions span {
+    font-size: 0.8rem; /* Establece el tamaño de fuente */
+    color: #333; /* Establece el color del texto */
+}
+
+.user-actions .pedido {
+    display: flex; /* Usa flexbox para alinear el carrito */
+    flex-direction: column; /* Organiza en columna */
+    align-items: center; /* Centra el contenido */
+    gap: 0.2rem; /* Espacio entre imagen y texto */
+}
+
+.pedido-count {
+    font-size: 0.8rem; /* Establece el tamaño de fuente del contador */
+    color: #333; /* Establece el color del texto */
+}
+
+.espacio {
+    display: none; /* Oculta por defecto */
+}
+
+/* Estilos para la segunda fila del header */
+.header-middle {
+    background-color: #b1fac1; /* Establece el color de fondo */
+    padding: 0.6rem 1rem; /* Agrega relleno */
+    display: flex; /* Usa flexbox para alinear los enlaces */
+    justify-content: center; /* Centra los enlaces */
+    gap: 1.5rem; /* Espacio entre los enlaces */
+}
+
+.header-middle a {
+    color: #333; /* Establece el color del texto */
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 0.9rem; /* Establece el tamaño de fuente */
+}
+
+.header-middle a:hover {
+    color: #3f915d; /* Cambia el color al pasar el ratón */
+}
+
+/* Estilos para la tercera fila del header: Menú con submenús desplegables */
+.header-bottom {
+    background-color: #fff; /* Establece el color de fondo blanco */
+    padding: 0.5rem 1rem; /* Agrega relleno */
+    display: flex; /* Usa flexbox para alinear los elementos */
+    justify-content: center; /* Centra los elementos */
+    gap: 0.5rem; /* Espacio entre los elementos */
+    border-bottom: 1px solid #e0e0e0; /* Agrega un borde inferior */
+}
+
+.dropdown {
+    position: relative; /* Permite posicionar los submenús relativos al elemento */
+}
+
+.dropbtn {
+    color: #333; /* Establece el color del texto */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Aplica negrita */
+    font-size: 0.9rem; /* Establece el tamaño de fuente */
+}
+
+.dropdown-content {
+    display: none; /* Oculta el contenido desplegable por defecto */
+    position: fixed; /* Fija el desplegable en la pantalla */
+    left: 0; /* Coloca el desplegable en la parte izquierda */
+    right: 0; /* Extiende el desplegable hasta la derecha */
+    background-color: #fff; /* Establece el color de fondo blanco */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Agrega sombra */
+    z-index: 1000; /* Coloca el desplegable por encima de otros elementos */
+    border-radius: 0; /* Elimina el redondeo de esquinas */
+    width: 100%; /* Ocupa todo el ancho */
+    min-height: 300px; /* Establece una altura mínima */
+}
+
+.dropdown-inner {
+    display: flex; /* Usa flexbox para alinear el contenido */
+    justify-content: center; /* Centra el contenido */
+    padding: 2rem; /* Agrega relleno */
+    gap: 2rem; /* Espacio entre los elementos */
+    max-width: 1200px; /* Limita el ancho máximo */
+    margin: 0 auto; /* Centra el contenedor */
+}
+
+.dropdown-column {
+    flex: 1; /* Permite que las columnas crezcan */
+}
+
+.dropdown-column h4 {
+    font-size: 1rem; /* Establece el tamaño de fuente del título */
+    margin-bottom: 0.5rem; /* Agrega margen inferior */
+    color: #333; /* Establece el color del título */
+}
+
+.dropdown-column a {
+    display: block; /* Hace que los enlaces ocupen todo el ancho */
+    color: #666; /* Establece el color del texto */
+    padding: 0.3rem 0; /* Agrega relleno vertical */
+    text-decoration: none; /* Elimina el subrayado */
+    font-size: 0.9rem; /* Establece el tamaño de fuente */
+}
+
+.dropdown-column a:hover {
+    color: #f8b7d3; /* Cambia el color al pasar el ratón */
+}
+
+.dropdown-images {
+    flex: 1; /* Permite que el contenedor de imágenes crezca */
+    display: flex; /* Usa flexbox para alinear las imágenes */
+    flex-direction: column; /* Organiza las imágenes en columna */
+    gap: 1rem; /* Espacio entre las imágenes */
+}
+
+.dropdown-images img {
+    width: 300px; /* Establece un ancho fijo */
+    height: 300px; /* Establece una altura fija */
+    object-fit: cover; /* Ajusta la imagen al contenedor */
+    border-radius: 4px; /* Redondea las esquinas */
+}
+
+.dropdown-images p {
+    text-align: center; /* Centra el texto */
+    font-size: 0.9rem; /* Establece el tamaño de fuente */
+    color: #333; /* Establece el color del texto */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; /* Muestra el contenido desplegable al pasar el ratón */
+}
+
+.dropdown:hover .dropbtn {
+    color: #45af6e; /* Cambia el color del botón al pasar el ratón */
+}
+
+/* Ajustar para pantallas pequeñas */
+@media (max-width: 768px) {
+
+    .header-top {
+        flex-wrap: nowrap; /* Evita que los elementos se muevan de línea */
+    }
+    
+    .logo {
+        flex-shrink: 0; /* Evita que el logo se deforme */
+    }
+    
+    .search-bar {
+        position: absolute; /* Permite posicionar la barra de búsqueda */
+        top: 100%; /* Debajo del header */
+        left: 0; /* Alinea a la izquierda */
+        right: 0; /* Alinea a la derecha */
+        justify-content: center; /* Centra el contenido */
+        margin: 1rem; /* Espacio alrededor */
+    }
+    
+    .search-bar input {
+        width: 88%; /* Ancho del input en pantallas pequeñas */
+    }
+    
+    .espacio {
+        display: block; /* Muestra el espacio adicional */
+        height: 3.8rem; /* Tamaño del espacio (ajustable) */
+    }
+    
+    .user-actions {
+        flex-shrink: 0; /* Evita que se compriman los elementos de usuario */
+    }
+
+    .user-actions .my-orders {
+    display: none; /* Oculta la opción my orders en pantallas pequeñas */
+    }
+}
+/* Estilos responsivos para el header */
+@media (max-width: 768px) {
+    .dropdown-inner {
+        flex-direction: column; /* Apila las columnas verticalmente */
+    }
+    .dropdown-images img {
+        width: 150px; /* Reduce el tamaño de las imágenes */
+        height: 150px; /* Reduce la altura de las imágenes */
+    }
+}
