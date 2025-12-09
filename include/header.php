@@ -83,16 +83,15 @@ $result = $conn->query($sql);
     <!-- Segunda fila: Links a otras páginas -->
     <nav class="header-middle">
         <?php while($row = $result->fetch_assoc()): ?>
-        <a href="categoria.php?id=<?php echo $row['id_catgria']; ?>">
-            <?php echo htmlspecialchars($row['nombre']); ?>
-        </a>
+        <a href="categoria.php?nombre=<?php echo $row['nombre']; ?>"><?php echo htmlspecialchars($row['nombre']); ?></a>
         <?php endwhile; ?>
     </nav>
-   <!--<script src="../assets/js/search.js"></script>-->
+    <script src="../assets/js/search.js"></script>
+    
 </header>
 
 <div class="user-actions">
-    <?php if (isset($_SESSION['id_cliente'])): ?>
+    <?php if (isset($_SESSION['user_id'])): ?>
         <h4>Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?></h4>
     <?php else: ?>
     <?php endif; ?>
