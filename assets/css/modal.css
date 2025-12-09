@@ -50,15 +50,10 @@
     margin: 0;
 }
 
-.modal-rating {
-    font-size: 1.2rem;
-    color: #f1c40f;
-}
-
 .modal-price {
     font-size: 1.4rem;
     font-weight: bold;
-    color: #e91e63;
+    color: #25b844;
 }
 
 .modal-description {
@@ -68,7 +63,7 @@
 
 .modal-description h3 {
     font-size: 1.2rem;
-    color: #333;
+    color: #202020;
     margin: 10px 0 5px;
 }
 
@@ -92,21 +87,6 @@
     font-size: 1rem;
 }
 
-.modal-add-to-cart {
-    background: #00c4cc;
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background 0.3s ease;
-}
-
-.modal-add-to-cart:hover {
-    background: #00a0a6;
-}
-
 .modal-close {
     position: absolute;
     top: 10px;
@@ -118,7 +98,7 @@
 }
 
 .modal-close:hover {
-    color: #e91e63;
+    color: #25b844;
 }
 
 .image-zoom-modal {
@@ -148,8 +128,9 @@
 }
 
 .image-zoom-modal .modal-close:hover {
-    color: #e91e63;
+    color: #25b844;
 }
+
 
 @media (max-width: 768px) {
     .modal-content {

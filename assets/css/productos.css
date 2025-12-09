@@ -7,6 +7,14 @@
     margin: 3rem auto 0; /* Centra la cuadrícula con margen superior */
 }
 
+.titulo-princ {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #333;
+}
+
 .producto {
     text-align: left; /* Alinea el texto a la izquierda */
 }
@@ -23,26 +31,6 @@
     font-size: 1rem; /* Establece el tamaño de fuente del título */
     color: #333; /* Establece el color del título */
     margin-bottom: 0.3rem; /* Agrega margen inferior */
-}
-
-.producto .rating {
-    color: #f5a623; /* Establece el color de la calificación */
-    font-size: 0.9rem; /* Establece el tamaño de fuente */
-    margin-bottom: 0.3rem; /* Agrega margen inferior */
-}
-
-.producto .price {
-    font-size: 1rem; /* Establece el tamaño de fuente del precio */
-    color: #333; /* Establece el color del precio */
-    font-weight: bold; /* Aplica negrita */
-    margin-bottom: 0.3rem; /* Agrega margen inferior */
-}
-
-.producto .price .old-price {
-    color: #999; /* Establece el color del precio anterior */
-    text-decoration: line-through; /* Tacha el precio anterior */
-    font-weight: normal; /* Elimina la negrita */
-    margin-right: 0.5rem; /* Agrega margen a la derecha */
 }
 
 .producto .availability {
@@ -199,46 +187,6 @@
 @media (max-width: 768px) {
     .productos-grid {
         grid-template-columns: repeat(2, 1fr); /* Usa 2 columnas en pantallas pequeñas */
-    }
-    .modal {
-        width: 90%; /* Ajusta el ancho del modal */
-        max-width: 500px; /* Limita el ancho máximo */
-    }
-    .modal-content {
-        flex-direction: column; /* Apila el contenido verticalmente */
-        padding: 20px; /* Reduce el relleno */
-    }
-    .modal-left, .modal-right {
-        padding: 0; /* Elimina el relleno */
-    }
-    .modal-left {
-        margin-bottom: 20px; /* Agrega margen inferior */
-    }
-    .modal-right h2 {
-        font-size: 1.5rem; /* Reduce el tamaño del título */
-    }
-    .modal-rating span {
-        font-size: 1.2rem; /* Reduce el tamaño de las estrellas */
-    }
-    .modal-price {
-        font-size: 1.2rem; /* Reduce el tamaño del precio */
-    }
-    .modal-description h3 {
-        font-size: 1.1rem; /* Reduce el tamaño del título de la descripción */
-    }
-    .modal-description p {
-        font-size: 0.9rem; /* Reduce el tamaño del texto de la descripción */
-    }
-    .modal-options h3 {
-        font-size: 1.1rem; /* Reduce el tamaño del título de las opciones */
-    }
-    .modal-quantity {
-        width: 60px; /* Reduce el ancho del input */
-        padding: 5px; /* Reduce el relleno */
-    }
-    .modal-add-to-cart {
-        padding: 10px 20px; /* Reduce el relleno del botón */
-        font-size: 1rem; /* Reduce el tamaño del texto del botón */
     }
 }
 
