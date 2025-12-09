@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 include 'db_connect.php'; 
 // Obtener categorías
 $sql = "SELECT id_catgria, nombre FROM categoria";
@@ -63,7 +63,7 @@ $result = $conn->query($sql);
             <button>Buscar</button>
         </div>
         <div class="user-actions">
-            <a href="<?php echo isset($_SESSION['id_cliente']) ? '../includes/logout.php':'../pages/usuario.php'; ?>" class="sign-in">
+            <a href="<?php echo isset($_SESSION['id_cliente']) ? '../include/logout.php':'../pages/usuario.php'; ?>" class="sign-in">
                 <img src="../assets/img/sign_in.jpg" alt="Sign In">
                 <span>
                     <?php if (isset($_SESSION['id_cliente'])): ?>
@@ -92,7 +92,7 @@ $result = $conn->query($sql);
 </header>
 
 <div class="user-actions">
-    <?php if (isset($_SESSION['user_id'])): ?>
+    <?php if (isset($_SESSION['id_cliente'])): ?>
         <h4>Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?></h4>
     <?php else: ?>
     <?php endif; ?>
