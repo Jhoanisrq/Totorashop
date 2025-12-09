@@ -6,8 +6,6 @@ include '../includes/header.php';
 <head>
     <link rel="stylesheet" href="../assets/css/productos.css">
     <link rel="stylesheet" href="../assets/css/modal.css">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/footer.css">
 </head>
 <main>
     <div class="filter-container">

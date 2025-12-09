@@ -11,4 +11,5 @@ include '../include/header.php';
 <main>
     <div class="productos-grid"></div>
 </main>
+<?php include '../include/footer.php'; ?>
 <script src="../assets/js/productos.js"></script>
