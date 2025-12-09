@@ -4,7 +4,6 @@ include '../include/db_connect.php';
 include '../include/header.php';
 ?>
 <head>
-    <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="../assets/css/productos.css">
     <link rel="stylesheet" href="../assets/css/modal.css">
 </head>

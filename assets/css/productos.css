@@ -151,9 +151,9 @@
     font-size: 1rem; /* Establece el tamaño de fuente */
 }
 
-.modal-add-to-cart {
-    background: #e91e63; /* Establece el color de fondo del botón */
-    color: #fff; /* Establece el color del texto */
+.modal-add-to-pedido {
+    background: #b1fac1; /* Establece el color de fondo del botón */
+    color: #444444; /* Establece el color del texto */
     padding: 12px 24px; /* Agrega relleno */
     border: none; /* Elimina el borde */
     border-radius: 5px; /* Redondea las esquinas */
@@ -161,8 +161,8 @@
     font-size: 1.1rem; /* Establece el tamaño de fuente */
 }
 
-.modal-add-to-cart:hover {
-    background: #d81b60; /* Cambia el color de fondo al pasar el ratón */
+.modal-add-to-pedido:hover {
+    background: #25b844; /* Cambia el color de fondo al pasar el ratón */
 }
 
 .modal-close {
