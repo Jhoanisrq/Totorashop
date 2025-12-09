@@ -3,10 +3,9 @@ $host = 'localhost';
 $username = 'root'; // Cambia esto si tu usuario de MySQL es diferente
 $password = ''; // Cambia esto si tu contraseña de MySQL es diferente
 $dbname = 'totorashop';
-$port = '3307';
 
 // Conectar a la base de datos con MySQLi
-$conn = new mysqli($host, $username, $password, $dbname, $port);
+$conn = new mysqli($host, $username, $password, $dbname);
 
 // Verificar la conexión
 if ($conn->connect_error) {
