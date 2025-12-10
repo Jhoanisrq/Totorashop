@@ -96,38 +96,23 @@
     color: #333; /* Establece el color del título */
 }
 
-.modal-rating {
-    margin-bottom: 15px; /* Agrega margen inferior */
-}
-
-.modal-rating span {
-    color: #f5a623; /* Establece el color de las estrellas */
-    font-size: 1.4rem; /* Establece el tamaño de las estrellas */
-}
-
 .modal-price {
-    font-size: 1.4rem; /* Establece el tamaño del precio */
+    font-size: 1.2rem; /* Establece el tamaño del precio */
     font-weight: bold; /* Aplica negrita */
-    color: #333; /* Establece el color del precio */
-    margin-bottom: 20px; /* Agrega margen inferior */
+    color: #181818; /* Establece el color del precio */
+    margin-bottom: 15px; /* Agrega margen inferior */
 }
 
 .modal-description h3 {
     font-size: 1.2rem; /* Establece el tamaño del título de la descripción */
     margin-bottom: 8px; /* Agrega margen inferior */
-    color: #333; /* Establece el color del título */
+    color: #181818; /* Establece el color del título */
 }
 
 .modal-description p {
     font-size: 1rem; /* Establece el tamaño del texto de la descripción */
     color: #666; /* Establece el color del texto */
-    margin-bottom: 20px; /* Agrega margen inferior */
-}
-
-.modal-options h3 {
-    font-size: 1.2rem; /* Establece el tamaño del título de las opciones */
-    margin-bottom: 8px; /* Agrega margen inferior */
-    color: #333; /* Establece el color del título */
+    margin-bottom: 15px; /* Agrega margen inferior */
 }
 
 .modal-quantity {

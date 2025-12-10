@@ -89,13 +89,41 @@ function abrirModal(prod) {
         addBtn.addEventListener("click", () => {
             const qtyInput = modal.querySelector(".modal-quantity");
             const cantidad = qtyInput ? parseInt(qtyInput.value || "1", 10) : 1;
-            if (cantidad <= 0 || cantidad > Number(stock_total)) {
-                alert("Cantidad inválida o mayor al stock disponible.");
-                return;
-            }
-            alert(`Producto agregado (sin lógica aún). Cantidad: ${cantidad}`);
-            // aquí luego iría la llamada fetch para guardar en sesión
-            closeModal();
+
+            // Normalización de campos
+            const id = prod.id_producto || prod.id || prod.id_prod || 0;
+            const precio = precioNum;
+            const stock = stock_total;
+
+            fetch("../include/add_to_pedido.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body:
+                    `id_producto=${id}` +
+                    `&nombre=${encodeURIComponent(nombre)}` +
+                    `&imagen=${encodeURIComponent(imagen)}` +
+                    `&descripcion=${encodeURIComponent(descripcion)}` +
+                    `&precio=${precio}` +
+                    `&cantidad=${cantidad}` +
+                    `&stock=${stock}`
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.message);
+                    if (data.success) {
+                        modal.remove();
+                        overlay.remove();
+                    }
+                    // Actualizar contador del header
+                    fetch("../include/get_pedido_count.php")
+                        .then(res => res.json())
+                        .then(countData => {
+                            if (countData.success) {
+                                document.getElementById("pedido-count").textContent = countData.count;
+                            }
+                        });
+                })
+                .catch(err => console.error("Error:", err));
         });
     }
 }

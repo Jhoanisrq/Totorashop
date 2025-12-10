@@ -73,9 +73,17 @@ $result = $conn->query($sql);
                     <?php endif; ?>
                 </span>
             </a>
-            <a href="#" class="pedido">
+            <a href="../pages/pedido.php" class="pedido">
                 <img src="../assets/img/pedidos.jpg" alt="pedidos">
-                <span>Pedido (<span id="pedido-count">0</span>)</span>
+                <?php 
+                $pedidoCount = 0;
+                if (isset($_SESSION['pedido'])) {
+                    foreach ($_SESSION['pedido'] as $item) {
+                        $pedidoCount += $item['cantidad'];
+                    }
+                }
+                ?>
+                <span>Pedido (<span id="pedido-count"><?= $pedidoCount ?></span>)</span>
             </a>
         </div>
     </div>

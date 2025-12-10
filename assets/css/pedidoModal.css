@@ -1,0 +1,124 @@
+.pedido-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(3px);
+    z-index: 2000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pedido-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    z-index: 2001;
+}
+
+.modal-header {
+    position: center;
+}
+
+.modal-close-x {
+    position: absolute;
+    top: 3px;
+    right: 6px;
+    font-size: 24px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #444;
+}
+
+.modal-close-x:hover {
+    color: #000;
+}
+
+.ubicacion-container {
+    margin: 10px 0;
+    padding: 12px;
+    background: #fafafa;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.radio-dir {
+    display: block;
+    margin: 6px 0;
+}
+
+.btn-add-ubicacion {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #b1fac1;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.btn-add-ubicacion:hover {
+    background: #9debb0;
+}
+
+#form-ubicacion.hidden {
+    display: none;
+}
+
+#form-ubicacion {
+    margin-top: 15px;
+    padding: 12px;
+    background: #eefdf1;
+    border-radius: 10px;
+}
+
+#form-ubicacion input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+}
+
+.btn-guardar-ubicacion {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    background: #aaf5b7;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.btn-guardar-ubicacion:hover {
+    background: #71c781;
+}
+
+.btn-confirmar {
+    width: 100%;
+    padding: 10px;
+    background: #86e69c;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.btn-confirmar:hover {
+    background: #5fc074;
+}

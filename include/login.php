@@ -42,7 +42,7 @@ if (!password_verify($password, $stored_pass)) {
 
     } else {
         // Contraseña incorrecta
-        header('Location: ../pages/usuarios.php?error=incorrect_password');
+        header('Location: ../pages/usuario.php?error=incorrect_password');
         exit;
     }
 }
