@@ -74,8 +74,28 @@ $nombre_empleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? '');
         <div class="w3-col l3 m6 s12">
             <a href="../pages/botonPedidos.php" class="option-link">
                 <div class="w3-card option-card w3-center">
-                    <img src="../assets/img/pedidos.png" alt="Crear Empleado" class="option-icon">
+                    <img src="../assets/img/pedidos.png" alt="Pedidos" class="option-icon">
                     <div class="option-label">Pedidos</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Botón 6: Ajustes -->
+        <div class="w3-col l3 m6 s12">
+            <a href="../pages/botonAjustes.php" class="option-link">
+                <div class="w3-card option-card w3-center">
+                    <img src="../assets/img/ajuste.png" alt="Ajuste inventario" class="option-icon">
+                    <div class="option-label">Ajuste</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Botón 7: Ajustes -->
+        <div class="w3-col l3 m6 s12">
+            <a href="../pages/botonMovimiento.php" class="option-link">
+                <div class="w3-card option-card w3-center">
+                    <img src="../assets/img/movimiento.png" alt="Movimiento de inventario" class="option-icon">
+                    <div class="option-label">Ajuste</div>
                 </div>
             </a>
         </div>
