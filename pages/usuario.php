@@ -17,7 +17,7 @@
                 	<div class="container-input"><input type="password" name="password" placeholder="Contraseña" required></div>
                 	<button type="submit" class="boton">Iniciar Sesión</button>
                 	<p>¿No tiene cuenta? <a href="#" class="ok-account">Registrarse</a></p>
-					<p>¿Eres un empleado? <a href="#">Inicie Sesion</a></p>
+					<p>¿Eres un empleado? <a href="../pages/login_empleado.php">Inicie Sesión</a></p>
             	</form>
 			</div>
         </div>
