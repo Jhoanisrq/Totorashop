@@ -1,122 +1,123 @@
-<?php
-session_start();
-if (!isset($_SESSION['id_empleado'])) {
-    header("Location: ../pages/login_empleado.php?error=Debes iniciar sesión.");
-    exit();
-}
-
-require_once("../include/db_connect.php");
-
-$mensaje = "";
-
-// Procesar formulario
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    // Campos de proveedor
-    $nombre     = $_POST['nombre'];
-    $telefono   = $_POST['telefono'] ?? null;
-    $correo     = $_POST['correo'] ?? null;
-
-    // Campos de dirección
-    $ciudad     = $_POST['ciudad'];
-    $distrito   = $_POST['distrito'];
-    $nro_calle  = $_POST['nro_calle'];
-    $referencia = $_POST['referencia'] ?? null;
-
-    // 1️⃣ Insertar la dirección primero
-    $stmt_dir = $conn->prepare("
-        INSERT INTO direccion (ciudad, distrito, nro_calle, referencia)
-        VALUES (?, ?, ?, ?)
-    ");
-    $stmt_dir->bind_param("ssss", $ciudad, $distrito, $nro_calle, $referencia);
-
-    if ($stmt_dir->execute()) {
-        $id_direccion = $stmt_dir->insert_id;
-
-        // 2️⃣ Luego insertar el proveedor con el ID de dirección
-        $stmt_prov = $conn->prepare("
-            INSERT INTO proveedor (nombre, telefono, correo, id_drccion)
-            VALUES (?, ?, ?, ?)
-        ");
-        $stmt_prov->bind_param("sssi", $nombre, $telefono, $correo, $id_direccion);
-
-        if ($stmt_prov->execute()) {
-            header("Location: ../pages/botonProveedores.php?mensaje=agregado");
-            exit();
-        } else {
-            $mensaje = "Error al guardar proveedor: " . $stmt_prov->error;
-        }
-
-        $stmt_prov->close();
-    } else {
-        $mensaje = "Error al guardar dirección: " . $stmt_dir->error;
-    }
-
-    $stmt_dir->close();
-}
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Agregar Proveedor</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="../assets/css/empleadoStyle.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
 <body>
 
+<!-- TOP BAR -->
 <div class="top-bar">
     <div class="top-left">
-        <a href="../pages/botonProveedores.php" class="back-button">&#8592;</a>
-        <span class="welcome-message">Agregar proveedor</span>
+        <a href="../pages/botonOrdenCompra.php" class="back-button">&#8592;</a>
+        <span class="welcome-message">Crear Orden de Compra</span>
     </div>
+
     <div class="user-box">
         <a href="../include/logoutEmpleado.php" class="logout-button">Cerrar sesión</a>
         <img src="https://www.w3schools.com/howto/img_avatar.png" class="user-avatar-small" alt="Avatar">
     </div>
 </div>
 
-<div class="container my-4">
+<div class="container-oc">
 
-    <?php if ($mensaje): ?>
-        <div class="alert alert-danger"><?= htmlspecialchars($mensaje) ?></div>
-    <?php endif; ?>
+    <h2>Crear Orden de Compra</h2>
 
-    <div class="bg-white p-4 shadow-sm rounded-4">
+    <!-- Seleccionar proveedor -->
+    <div class="form-row">
+        <label>Proveedor:</label>
+        <select id="proveedor">
+            <option value="">Seleccione proveedor</option>
+            <?php while($p = $proveedores->fetch_assoc()): ?>
+                <option value="<?= $p['id_provdor'] ?>"><?= $p['nombre'] ?></option>
+            <?php endwhile ?>
+        </select>
+    </div>
 
-        <form method="POST">
+    <!-- Seleccionar producto + nuevo -->
+    <div class="form-row">
+        <label>Producto:</label>
+        <select id="producto_select">
+            <option value="">Seleccione producto</option>
+            <?php while($pr = $productos->fetch_assoc()): ?>
+                <option value="<?= $pr['id_producto'] ?>"><?= $pr['nombre'] ?></option>
+            <?php endwhile ?>
+        </select>
+        <button class="btn-green" id="btnNuevoProducto">Nuevo producto</button>
+    </div>
 
-            <h4 class="mb-3">Información del proveedor</h4>
+    <div class="form-row">
+        <label>Cantidad:</label>
+        <input type="number" id="cantidad" min="1" value="1">
 
-            <label>Nombre:</label>
-            <input class="form-control mb-3" name="nombre" required>
+        <label>Precio unitario:</label>
+        <input type="number" id="precio_u" min="0" step="0.01">
 
-            <label>Teléfono:</label>
-            <input class="form-control mb-3" name="telefono">
+        <button class="btn-blue" onclick="agregarItem()">Agregar</button>
+    </div>
 
-            <label>Correo:</label>
-            <input class="form-control mb-3" name="correo" type="email">
+    <hr>
 
-            <h4 class="mt-4 mb-3">Dirección</h4>
+    <h3>Detalle temporal de la OC</h3>
+    <div id="tabla_detalle" class="detalle-box"></div>
 
-            <label>Ciudad:</label>
-            <input class="form-control mb-3" name="ciudad" required>
+    <h3>Total: S/ <span id="total_oc">0.00</span></h3>
 
-            <label>Distrito:</label>
-            <input class="form-control mb-3" name="distrito" required>
+    <button id="btnFinalizar" class="btn-final">Ordenar Compra</button>
 
-            <label>Número / Calle:</label>
-            <input class="form-control mb-3" name="nro_calle" required>
+</div>
 
-            <label>Referencia:</label>
-            <input class="form-control mb-3" name="referencia">
+<!-- ============================
+      MODAL CATEGORÍA
+============================ -->
+<div id="modalCategoria" class="modal">
+    <div class="modal-content">
+        <h3>Nueva Categoría</h3>
 
-            <button class="btn btn-dark mt-3" type="submit">Guardar proveedor</button>
+        <label>Nombre:</label>
+        <input type="text" id="cat_nombre">
 
-        </form>
+        <label>Descripción:</label>
+        <textarea id="cat_desc"></textarea>
+
+        <button class="btn-green" onclick="guardarCategoria()">Guardar</button>
+        <button class="close" onclick="cerrarModal('modalCategoria')">Cerrar</button>
     </div>
 </div>
+
+<!-- ============================
+      MODAL PRODUCTO
+============================ -->
+<div id="modalProducto" class="modal">
+    <div class="modal-content">
+        <h3>Nuevo Producto</h3>
+
+        <label>Categoría:</label>
+        <select id="prod_categoria">
+            <?php while ($c = $categorias->fetch_assoc()): ?>
+                <option value="<?= $c['id_catgria'] ?>"><?= $c['nombre'] ?></option>
+            <?php endwhile; ?>
+        </select>
+
+        <button class="btn-green" onclick="abrirModal('modalCategoria')">Nueva categoría</button>
+        <br><br>
+
+        <label>Nombre:</label>
+        <input type="text" id="prod_nombre">
+
+        <label>Descripción:</label>
+        <textarea id="prod_desc"></textarea>
+
+        <label>Perecible:</label>
+        <select id="prod_perecible">
+            <option value="0">No</option>
+            <option value="1">Sí</option>
+        </select>
+
+        <label>Fecha vencimiento (si aplica):</label>
+        <input type="date" id="prod_fecha_v">
+
+        <label>Garantía (meses):</label>
+        <input type="number" id="prod_garantia" min="0">
+
+        <button class="btn-blue" onclick="guardarProducto()">Guardar</button>
+        <button class="close" onclick="cerrarModal('modalProducto')">Cerrar</button>
+    </div>
+</div>
+
+<script src="../assets/js/ordenCompra.js"></script>
 </body>
-</html>
-<?php $conn->close(); ?>
