@@ -92,6 +92,14 @@ try {
         $stmtD->execute();
     }
 
+    // -------------------------------
+    // LIMPIAR PEDIDO TEMPORAL EN SESIÓN
+    // -------------------------------
+    $_SESSION['pedido'] = []; // elimina todo lo temporal del carrito
+    
+    // -------------------------------
+    // RESPUESTA JSON
+    // -------------------------------
     echo json_encode([
         "success" => true,
         "message" => "Pedido registrado correctamente",

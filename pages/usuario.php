@@ -14,7 +14,10 @@
                 	<h2>Iniciar Sesión</h2>
                 	<p>Use su correo y contraseña</p>
                 	<div class="container-input"><input type="email" name="correo" placeholder="Correo" required></div>
-                	<div class="container-input"><input type="password" name="password" placeholder="Contraseña" required></div>
+                	<div class="container-input" style="position: relative;">
+					    <input id="login-password" type="password" name="password" placeholder="Contraseña" required>
+					    <span class="toggle-pass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+					</div>
                 	<button type="submit" class="boton">Iniciar Sesión</button>
                 	<p>¿No tiene cuenta? <a href="#" class="ok-account">Registrarse</a></p>
 					<p>¿Eres un empleado? <a href="../pages/login_empleado.php">Inicie Sesión</a></p>
@@ -30,7 +33,10 @@
             	    <div class="container-input"><input type="text" name="apellido" placeholder="Apellido" required></div>
 					<div class="container-input"><input type="date" name="fech_nacmnto" placeholder="Fecha de Nacimiento" required></div>
             	    <div class="container-input"><input type="email" name="correo" placeholder="Correo" required></div>
-            	    <div class="container-input"><input type="password" name="password" placeholder="Contraseña" required></div>
+            	    <div class="container-input" style="position: relative;">
+					    <input id="register-password" type="password" name="password" placeholder="Contraseña" required>
+					    <span class="toggle-pass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+					</div>
             	    <div class="container-input"><input type="text" name="telefono" placeholder="Teléfono"></div>
 					<button type="submit" class="boton">Registrarse</button>
             	    <p>¿Ya tiene cuenta? <a href="#" class="no-account">Inicie Sesión</a></p>

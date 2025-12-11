@@ -12,7 +12,7 @@ if (!isset($_SESSION['id_cliente'])) {
 $id = $_SESSION['id_cliente'];
 
 $sql = "
-    SELECT d.id_drccion AS id, d.ciudad, d.distrito, d.nro_calle, d.referencia
+    SELECT cd.id_clnte_drccion AS id, d.ciudad, d.distrito, d.nro_calle, d.referencia
     FROM cliente_direccion cd
     JOIN direccion d ON cd.id_drccion = d.id_drccion
     WHERE cd.id_cliente = ?

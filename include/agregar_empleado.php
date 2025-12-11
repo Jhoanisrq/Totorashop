@@ -7,6 +7,20 @@ if (!isset($_SESSION['id_empleado'])) {
 
 require_once("db_connect.php");
 
+// Obtener cargos
+$cargos = [];
+$res = $conn->query("SELECT id_tipo_crg, nombre FROM tipo_cargo");
+while($row = $res->fetch_assoc()){
+    $cargos[] = $row;
+}
+
+// Obtener almacenes
+$almacenes = [];
+$res = $conn->query("SELECT id_almcen, nombre FROM almacen");
+while($row = $res->fetch_assoc()){
+    $almacenes[] = $row;
+}
+
 $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -109,8 +123,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label>Teléfono:</label>
             <input class="w3-input w3-margin-bottom" name="telefono">
 
-            <label>ID cargo:</label>
-            <input class="w3-input w3-margin-bottom" name="id_tipo_crg" type="number" required>
+            <label>Cargo:</label>
+                <select class="w3-select w3-margin-bottom" name="id_tipo_crg" required>
+                    <option value="" disabled selected>Selecciona un cargo</option>
+                    <?php foreach($cargos as $c): ?>
+                        <option value="<?= $c['id_tipo_crg'] ?>"><?= htmlspecialchars($c['nombre']) ?></option>
+                    <?php endforeach; ?>
+                </select>
 
             <label>Fecha contrato:</label>
             <input class="w3-input w3-margin-bottom" type="date" name="fecha_cntrto">
@@ -118,12 +137,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <label>Salario:</label>
             <input class="w3-input w3-margin-bottom" name="salario" type="number" step="0.01">
 
-            <label>ID almacén:</label>
-            <input class="w3-input w3-margin-bottom" name="id_almcen" type="number" required>
+            <label>Almacén:</label>
+                <select class="w3-select w3-margin-bottom" name="id_almcen" required>
+                    <option value="" disabled selected>Selecciona un almacén</option>
+                    <?php foreach($almacenes as $a): ?>
+                        <option value="<?= $a['id_almcen'] ?>"><?= htmlspecialchars($a['nombre']) ?></option>
+                    <?php endforeach; ?>
+                </select>
 
             <label>Contraseña:</label>
-            <input class="w3-input w3-margin-bottom" type="password" name="password" required>
-
+                <div style="position: relative; width: 100%;">
+                    <input id="password-field" class="w3-input w3-margin-bottom" type="password" name="password" required style="padding-right: 30px;">
+                    <span id="toggle-pass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+                </div>
 
             <h4 class="w3-margin-top">Dirección</h4>
 
@@ -143,5 +169,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
     </div>
 </div>
+
+<script>
+const toggle = document.getElementById('toggle-pass');
+const input = document.getElementById('password-field');
+
+toggle.addEventListener('click', () => {
+    input.type = (input.type === 'password') ? 'text' : 'password';
+});
+</script>
 </body>
 </html>

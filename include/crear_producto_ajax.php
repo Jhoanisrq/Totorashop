@@ -23,7 +23,7 @@ if (!empty($_FILES['imagen']['name'])) {
     $ruta_guardar = $folder . $img_name;
 
     if (move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta_guardar)) {
-        $imagen = "assets/img/productos/" . $img_name; // ruta para la BD
+        $imagen = "../assets/img/productos/" . $img_name; // ruta para la BD
     }
 }
 

@@ -25,8 +25,27 @@ if ($result->num_rows === 0) {
 
 $empleado = $result->fetch_assoc();
 
-// Verificar contraseña (si está en texto plano, compara directamente; si está hasheada, usar password_verify)
-if ($pass !== $empleado['contraseña']) {
+// Verificar contraseña (texto plano o hash)
+$stored = $empleado['contraseña'];
+$is_valid = false;
+
+if (substr($stored, 0, 4) === '$2y$') {
+    // Contraseña hasheada
+    $is_valid = password_verify($pass, $stored);
+} else {
+    // Contraseña en texto plano
+    $is_valid = ($pass === $stored);
+    
+    // Si es correcta, actualizar a hash automáticamente
+    if ($is_valid) {
+        $hashed = password_hash($pass, PASSWORD_DEFAULT);
+        $stmt_upd = $conn->prepare("UPDATE empleado SET contraseña=? WHERE id_empldo=?");
+        $stmt_upd->bind_param("si", $hashed, $empleado['id_empldo']);
+        $stmt_upd->execute();
+    }
+}
+
+if (!$is_valid) {
     header("Location: ../pages/login_empleado.php?error=Contraseña incorrecta");
     exit();
 }
