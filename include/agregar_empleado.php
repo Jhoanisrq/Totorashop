@@ -1,4 +1,5 @@
 <?php
+// ../include/agregar_empleado.php
 session_start();
 if (!isset($_SESSION['id_empleado'])) {
     header("Location: ../pages/login_empleado.php?error=Debes iniciar sesión.");
@@ -32,10 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fecha_n = trim($_POST['fecha_ncmnto']);
     $telefono = trim($_POST['telefono']);
     $id_tipo_crg = intval($_POST['id_tipo_crg']);
-    $fecha_cntrto = trim($_POST['fecha_cntrto']);
+    $fecha_cntrto = trim($_POST['fecha_cntrto'] ?? '');
     $salario = trim($_POST['salario']);
     $id_almcen = intval($_POST['id_almcen']);
     $password = trim($_POST['password']);
+
+    // Si la fecha de contrato está vacía, usar la fecha actual
+    if ($fecha_cntrto === '') {
+        $fecha_cntrto = date('Y-m-d');
+    }
 
     // Dirección
     $ciudad = trim($_POST['ciudad']);
@@ -124,32 +130,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input class="w3-input w3-margin-bottom" name="telefono">
 
             <label>Cargo:</label>
-                <select class="w3-select w3-margin-bottom" name="id_tipo_crg" required>
-                    <option value="" disabled selected>Selecciona un cargo</option>
-                    <?php foreach($cargos as $c): ?>
-                        <option value="<?= $c['id_tipo_crg'] ?>"><?= htmlspecialchars($c['nombre']) ?></option>
-                    <?php endforeach; ?>
-                </select>
+            <select class="w3-select w3-margin-bottom" name="id_tipo_crg" required>
+                <option value="" disabled selected>Selecciona un cargo</option>
+                <?php foreach($cargos as $c): ?>
+                    <option value="<?= $c['id_tipo_crg'] ?>"><?= htmlspecialchars($c['nombre']) ?></option>
+                <?php endforeach; ?>
+            </select>
 
             <label>Fecha contrato:</label>
-            <input class="w3-input w3-margin-bottom" type="date" name="fecha_cntrto">
+            <input class="w3-input w3-margin-bottom" type="date" name="fecha_cntrto" placeholder="Si está vacío, se usará la fecha actual">
 
             <label>Salario:</label>
             <input class="w3-input w3-margin-bottom" name="salario" type="number" step="0.01">
 
             <label>Almacén:</label>
-                <select class="w3-select w3-margin-bottom" name="id_almcen" required>
-                    <option value="" disabled selected>Selecciona un almacén</option>
-                    <?php foreach($almacenes as $a): ?>
-                        <option value="<?= $a['id_almcen'] ?>"><?= htmlspecialchars($a['nombre']) ?></option>
-                    <?php endforeach; ?>
-                </select>
+            <select class="w3-select w3-margin-bottom" name="id_almcen" required>
+                <option value="" disabled selected>Selecciona un almacén</option>
+                <?php foreach($almacenes as $a): ?>
+                    <option value="<?= $a['id_almcen'] ?>"><?= htmlspecialchars($a['nombre']) ?></option>
+                <?php endforeach; ?>
+            </select>
 
             <label>Contraseña:</label>
-                <div style="position: relative; width: 100%;">
-                    <input id="password-field" class="w3-input w3-margin-bottom" type="password" name="password" required style="padding-right: 30px;">
-                    <span id="toggle-pass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
-                </div>
+            <div style="position: relative; width: 100%;">
+                <input id="password-field" class="w3-input w3-margin-bottom" type="password" name="password" required style="padding-right: 30px;">
+                <span id="toggle-pass" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+            </div>
 
             <h4 class="w3-margin-top">Dirección</h4>
 

@@ -100,7 +100,7 @@ $nombreEmpleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? ($_SESSION['n
     <button id="btnFinalizar" class="w3-button w3-teal w3-round w3-xlarge w3-block">Ordenar Compra</button>
 </div>
 
-<!-- MODAL CATEGORÍA -->
+<!-- MODAL CATEGORÍA 
 <div id="modalCategoria" class="w3-modal">
     <div class="w3-modal-content w3-round-large w3-padding">
         <h3>Nueva Categoría</h3>
@@ -114,7 +114,7 @@ $nombreEmpleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? ($_SESSION['n
         <button onclick="guardarCategoria()" class="w3-button w3-green w3-round w3-margin-top">Guardar</button>
         <button onclick="cerrarModal('modalCategoria')" class="w3-button w3-red w3-round w3-margin-top">Cerrar</button>
     </div>
-</div>
+</div>-->
 
 <!-- MODAL PRODUCTO -->
 <div id="modalProducto" class="w3-modal">
@@ -131,7 +131,7 @@ $nombreEmpleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? ($_SESSION['n
             <?php endwhile; ?>
         </select>
 
-        <button onclick="abrirModal('modalCategoria')" class="w3-button w3-blue w3-small w3-round w3-margin-top">Nueva categoría</button>
+        <!-- <button onclick="abrirModal('modalCategoria')" class="w3-button w3-blue w3-small w3-round w3-margin-top">Nueva categoría</button>-->
 
         <label>Nombre:</label>
         <input type="text" id="prod_nombre" class="w3-input w3-border w3-round">
