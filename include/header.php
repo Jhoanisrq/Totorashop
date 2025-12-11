@@ -1,4 +1,5 @@
 <?php
+//../include/header.php
 include 'db_connect.php'; 
 // Obtener categorías
 $sql = "SELECT id_catgria, nombre FROM categoria";
@@ -63,16 +64,26 @@ $result = $conn->query($sql);
             <button>Buscar</button>
         </div>
         <div class="user-actions">
-            <a href="<?php echo isset($_SESSION['id_cliente']) ? '../include/logout.php':'../pages/usuario.php'; ?>" class="sign-in">
-                <img src="../assets/img/sign_in.jpg" alt="Sign In">
-                <span>
-                    <?php if (isset($_SESSION['id_cliente'])): ?>
-                        Cerrar sesión
-                    <?php else: ?>
-                        Iniciar sesión
-                    <?php endif; ?>
-                </span>
-            </a>
+            <div class="user-dropdown">
+        <button class="user-btn">
+            <img src="../assets/img/sign_in.jpg" alt="User">
+            <span>
+                <?php echo isset($_SESSION['id_cliente']) ? $_SESSION['nombre'] : "Cuenta"; ?>
+            </span>
+            <i class="arrow">&#9662;</i>
+        </button>
+
+        <div class="dropdown-menu">
+            <?php if (!isset($_SESSION['id_cliente'])): ?>
+                <a href="../pages/usuario.php">Iniciar sesión</a>
+             
+            <?php else: ?>
+                <a href="../include/perfilCliente.php">Mi perfil</a>
+                <a href="../include/logout.php">Cerrar sesión</a>
+            <?php endif; ?>
+        </div>
+    </div>
+
             <a href="../pages/pedido.php" class="pedido">
                 <img src="../assets/img/pedidos.jpg" alt="pedidos">
                 <?php 
@@ -104,3 +115,14 @@ $result = $conn->query($sql);
     <?php else: ?>
     <?php endif; ?>
 </div>
+
+<script>
+document.querySelector(".user-btn").addEventListener("click", function(e) {
+    e.stopPropagation();
+    document.querySelector(".dropdown-menu").classList.toggle("show");
+});
+
+document.addEventListener("click", function() {
+    document.querySelector(".dropdown-menu").classList.remove("show");
+});
+</script>

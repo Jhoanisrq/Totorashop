@@ -1,48 +1,76 @@
 <?php
-include 'db_connect.php';
+require_once "db_connect.php";
+header("Content-Type: application/json");
 
-/*
-    OBJETIVO:
-    - Listar productos que provienen de órdenes de compra con estado 'Recibido'
-    - Mostrar su precio unitario (prcio_untr)
-    - Calcular el stock total sumando inventarios (todos los almacenes)
-*/
+try {
+    // 1. Consulta principal: todos los productos + stock total
+    $sql = "
+        SELECT 
+            p.id_producto,
+            p.nombre,
+            p.descripcion,
+            p.imagen,
+            p.id_catgria,
+            p.perecible,
+            p.precio AS precio_base,
+            IFNULL(SUM(i.cantidad), 0) AS stock_total
+        FROM producto p
+        LEFT JOIN inventario i ON p.id_producto = i.id_producto
+        GROUP BY p.id_producto
+        ORDER BY p.nombre ASC
+    ";
 
-$sql = "
-    SELECT 
-        p.id_producto,
-        p.nombre,
-        p.descripcion,
-        p.imagen,
-        dc.prcio_untr AS precio,
+    $result = $conn->query($sql);
 
-        -- Stock total (sumando inventarios)
-        IFNULL(SUM(i.cantidad), 0) AS stock_total
+    $productos = [];
 
-    FROM producto p
+    // 2. Consulta corregida: obtener el precio más reciente de una orden RECIBIDA
+    $sqlPrecio = "
+        SELECT d.prcio_untr
+        FROM detalle_compra d
+        INNER JOIN orden_compra oc ON oc.id_ordcmpra = d.id_ordcmpra
+        WHERE d.id_producto = ?
+        AND oc.estado = 'RECIBIDO'
+        ORDER BY oc.fecha_ordcmpra DESC
+        LIMIT 1
+    ";
 
-    -- Viene de detalle_compra
-    JOIN detalle_compra dc 
-        ON p.id_producto = dc.id_producto
+    $stmtPrecio = $conn->prepare($sqlPrecio);
 
-    -- Solo si la orden está recibida
-    JOIN orden_compra oc 
-        ON oc.id_ordcmpra = dc.id_ordcmpra
-        AND oc.estado = 'Recibido'
+    while ($row = $result->fetch_assoc()) {
 
-    -- Inventario puede no existir aún
-    LEFT JOIN inventario i 
-        ON i.id_producto = p.id_producto
+        $idProd = $row["id_producto"];
+        $precio = floatval($row["precio_base"]); // precio respaldo si no hay órdenes
 
-    GROUP BY p.id_producto, dc.prcio_untr
-";
+        // 3. Buscar precio desde órdenes recibidas
+        if ($stmtPrecio) {
+            $stmtPrecio->bind_param("i", $idProd);
+            $stmtPrecio->execute();
+            $resP = $stmtPrecio->get_result();
 
-$result = $conn->query($sql);
+            if ($resP && $resP->num_rows > 0) {
+                $pRow = $resP->fetch_assoc();
+                if ($pRow["prcio_untr"] !== null) {
+                    $precio = floatval($pRow["prcio_untr"]);
+                }
+            }
+        }
 
-$productos = [];
-while ($row = $result->fetch_assoc()) {
-    $productos[] = $row;
+        // 4. Armar respuesta del producto
+        $productos[] = [
+            "id_producto" => intval($row["id_producto"]),
+            "nombre"      => $row["nombre"],
+            "descripcion" => $row["descripcion"],
+            "imagen"      => $row["imagen"],
+            "id_catgria"  => intval($row["id_catgria"]),
+            "perecible"   => intval($row["perecible"]),
+            "stock_total" => intval($row["stock_total"]),
+            "precio"      => $precio
+        ];
+    }
+
+    echo json_encode($productos, JSON_UNESCAPED_UNICODE);
+
+} catch (Exception $e) {
+    echo json_encode(["error" => $e->getMessage()]);
 }
-
-header('Content-Type: application/json');
-echo json_encode($productos);

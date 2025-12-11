@@ -1,4 +1,5 @@
 <?php
+//../include/finalizar_orden_compra.php
 session_start();
 require_once "../include/db_connect.php";
 

@@ -1,4 +1,5 @@
 <?php
+//../include/editar_estado_pedido.php
 session_start();
 if (!isset($_SESSION['id_empleado'])) {
     header("Location: ../pages/login_empleado.php?error=Debes iniciar sesión.");
