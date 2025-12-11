@@ -9,5 +9,10 @@ document.addEventListener('click', e => {
         sign_in_container.style.display = 'block';
         sign_up_container.style.display = "none";
     }
-
 })
+document.querySelectorAll('.toggle-pass').forEach(span => {
+    span.addEventListener('click', () => {
+        const input = span.previousElementSibling;
+        input.type = (input.type === 'password') ? 'text' : 'password';
+    });
+});
