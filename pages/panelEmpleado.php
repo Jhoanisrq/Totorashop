@@ -99,6 +99,17 @@ $nombre_empleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? '');
                 </div>
             </a>
         </div>
+
+        <!-- Botón 8: Exportar BD -->
+        <div class="w3-col l3 m6 s12">
+            <a href="../pages/botonExportarBD.php" class="option-link">
+                <div class="w3-card option-card w3-center">
+                    <img src="../assets/img/exportar_bd.png" alt="Exportar BD" class="option-icon">
+                    <div class="option-label">Exportar BD</div>
+                </div>
+            </a>
+        </div>
+
     </div>
 </div>
 
