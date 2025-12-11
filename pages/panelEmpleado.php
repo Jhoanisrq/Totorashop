@@ -54,7 +54,7 @@ $nombre_empleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? '');
         <div class="w3-col l3 m6 s12">
             <a href="../pages/botonOrdenCompra.php" class="option-link">
                 <div class="w3-card option-card w3-center">
-                    <img src="../assets/img/order.png" alt="Orden de Compra" class="option-icon">
+                    <img src="../assets/img/orden_compra.png" alt="Orden de Compra" class="option-icon">
                     <div class="option-label">Orden de Compra</div>
                 </div>
             </a>
@@ -64,7 +64,7 @@ $nombre_empleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? '');
         <div class="w3-col l3 m6 s12">
             <a href="../pages/botonEmpleados.php" class="option-link">
                 <div class="w3-card option-card w3-center">
-                    <img src="../assets/img/employee.png" alt="Crear Empleado" class="option-icon">
+                    <img src="../assets/img/empleados.png" alt="Crear Empleado" class="option-icon">
                     <div class="option-label">Empleados</div>
                 </div>
             </a>
@@ -74,7 +74,7 @@ $nombre_empleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? '');
         <div class="w3-col l3 m6 s12">
             <a href="../pages/botonPedidos.php" class="option-link">
                 <div class="w3-card option-card w3-center">
-                    <img src="../assets/img/pedidos.png" alt="Pedidos" class="option-icon">
+                    <img src="../assets/img/pedidos.jpg" alt="Pedidos" class="option-icon">
                     <div class="option-label">Pedidos</div>
                 </div>
             </a>
@@ -94,8 +94,8 @@ $nombre_empleado = htmlspecialchars($_SESSION['nombre_empleado'] ?? '');
         <div class="w3-col l3 m6 s12">
             <a href="../pages/botonMovimiento.php" class="option-link">
                 <div class="w3-card option-card w3-center">
-                    <img src="../assets/img/movimiento.png" alt="Movimiento de inventario" class="option-icon">
-                    <div class="option-label">Ajuste</div>
+                    <img src="../assets/img/salidas.jpg" alt="Movimiento de inventario" class="option-icon">
+                    <div class="option-label">Movimiento</div>
                 </div>
             </a>
         </div>

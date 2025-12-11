@@ -16,16 +16,18 @@ SELECT
     c.nombre AS categoria,
     pr.nombre AS proveedor,
     a.nombre AS almacen,
-    i.cantidad AS cantidad_en_almacen
+    COALESCE(i.cantidad, 0) AS cantidad_en_almacen
 FROM producto p
+LEFT JOIN categoria c ON c.id_catgria = p.id_catgria
 LEFT JOIN inventario i ON i.id_producto = p.id_producto
 LEFT JOIN almacen a ON a.id_almcen = i.id_almcen
+
+-- Proveedor SI EXISTE (solo si el producto vino de una orden)
 LEFT JOIN entrada e ON e.id_invntrio = i.id_invntrio
 LEFT JOIN detalle_compra dc ON dc.id_dtlle_oc = e.id_dtlle_oc
-LEFT JOIN orden_compra oc ON oc.id_ordcmpra = dc.id_ordcmpra AND oc.estado = 'Recibido'
+LEFT JOIN orden_compra oc ON oc.id_ordcmpra = dc.id_ordcmpra
 LEFT JOIN proveedor pr ON pr.id_provdor = oc.id_provdor
-LEFT JOIN categoria c ON c.id_catgria = p.id_catgria
-WHERE oc.estado = 'Recibido'
+
 ORDER BY p.id_producto, a.id_almcen
 ";
 
@@ -103,7 +105,7 @@ $resultado = $conn->query($sql);
         </table>
     </div>
 </div>
-
+<a href="../include/agregar_productos.php" class="add-button" title="Agregar producto">+</a>
 <!-- Activar DataTable -->
 <script>
 $(document).ready(function() {
