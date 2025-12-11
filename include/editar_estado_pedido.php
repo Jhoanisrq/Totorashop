@@ -44,33 +44,63 @@ $estadosFinales = ["Entregado", "Cancelado"];
 
 // Función para actualizar inventario al enviar el pedido
 function enviarPedido($numP, $conn) {
+    // Obtener los detalles del pedido
     $stmt_det = $conn->prepare("SELECT * FROM detalle_pedido WHERE num_pddo = ?");
     $stmt_det->bind_param("i", $numP);
     $stmt_det->execute();
     $res_det = $stmt_det->get_result();
 
-    while($item = $res_det->fetch_assoc()) {
-        $id_producto = $item['id_producto'];
-        $cantidad = $item['cantidad'];
+    while ($item = $res_det->fetch_assoc()) {
 
-        // Buscar el inventario con mayor stock
-        $stmt_inv = $conn->prepare("SELECT id_almcen, stock FROM inventario WHERE id_producto = ? ORDER BY stock DESC LIMIT 1");
+        $id_producto = $item['id_producto'];
+        $cantidadPedida = $item['cantidad'];
+        $id_detalle = $item['id_dtlle_pddo'];
+        $costo_unitario = $item['prcio_untr']; // viene del pedido
+
+        // Buscar el inventario con mayor cantidad
+        $stmt_inv = $conn->prepare("
+            SELECT id_invntrio, id_almcen, cantidad 
+            FROM inventario 
+            WHERE id_producto = ? 
+            ORDER BY cantidad DESC 
+            LIMIT 1
+        ");
         $stmt_inv->bind_param("i", $id_producto);
         $stmt_inv->execute();
         $inv = $stmt_inv->get_result()->fetch_assoc();
         $stmt_inv->close();
 
-        if ($inv && $inv['stock'] >= $cantidad) {
-            // Restar stock
-            $stmt_upd = $conn->prepare("UPDATE inventario SET stock = stock - ? WHERE id_producto = ? AND id_almcen = ?");
-            $stmt_upd->bind_param("iii", $cantidad, $id_producto, $inv['id_almcen']);
+        // Si existe inventario
+        if ($inv && $inv['cantidad'] >= $cantidadPedida) {
+
+            $id_inventario = $inv['id_invntrio'];
+
+            // 1. Descontar inventario
+            $stmt_upd = $conn->prepare("
+                UPDATE inventario 
+                SET cantidad = cantidad - ? 
+                WHERE id_invntrio = ?
+            ");
+            $stmt_upd->bind_param("ii", $cantidadPedida, $id_inventario);
             $stmt_upd->execute();
             $stmt_upd->close();
+
+            // 2. Registrar SALIDA
+            $costoTotal = $costo_unitario * $cantidadPedida;
+
+            $stmt_sal = $conn->prepare("
+                INSERT INTO salida (id_invntrio, id_dtlle_pddo, cantidad, costo)
+                VALUES (?, ?, ?, ?)
+            ");
+            $stmt_sal->bind_param("iiid", $id_inventario, $id_detalle, $cantidadPedida, $costoTotal);
+            $stmt_sal->execute();
+            $stmt_sal->close();
         }
     }
 
     $stmt_det->close();
 }
+
 
 // Si se envió POST: actualizar
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
