@@ -1,3 +1,4 @@
+//ordenCompra.js
 function cargarTabla(detalle, total) {
     let html = `
         <table border="1">

@@ -1,42 +1,63 @@
-$(document).ready(function() {
-    let dataTables = {}; // Guardar instancias de DataTables
+let tablasDT = {}; // Para guardar las instancias DataTable
 
-    // Función para inicializar DataTable si aún no está
-    function initDataTable(id) {
-        if (!dataTables[id]) {
-            dataTables[id] = $('#' + id).DataTable({
-                responsive: true,
-                language: { url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json" }
-            });
-        }
-    }
+$(document).ready(function () {
 
-    // Función para mostrar tabla según tipo y calcular total
-    window.mostrarTabla = function(tipo) {
-        // Ocultar todas
-        $('#tabla-todos, #tabla-entrada, #tabla-salida, #tabla-ajuste').hide();
+    // Inicializar SOLO las tablas (no los DIV)
+    $("table").each(function () {
+        let idTabla = $(this).closest(".table-responsive").attr("id");
 
-        // Mostrar seleccionada
-        let tablaId = 'tabla-' + tipo;
-        $('#' + tablaId).show();
-
-        // Inicializar DataTable si no existe
-        initDataTable(tablaId);
-
-        // Calcular total a partir de la columna Costo (índice 3)
-        let total = 0;
-        dataTables[tablaId].rows({ search: 'applied' }).every(function() {
-            let col4 = this.data()[3]; // columna 4
-            if (col4) {
-                col4 = col4.toString().replace('S/', '').replace(/\s/g,'').replace(',','.');
-                let val = parseFloat(col4);
-                if (!isNaN(val)) total += val;
-            }
+        tablasDT[idTabla] = $(this).DataTable({
+            responsive: true,
+            autoWidth: false,
+            pageLength: 5,
+            lengthChange: false
         });
+    });
 
-        $('#totalMovimientos').text('Total: S/ ' + total.toFixed(2));
-    }
-
-    // Inicial: mostrar Todos
-    mostrarTabla('todos');
+    // Mostrar "todos" al inicio
+    mostrarTabla("todos");
 });
+
+
+// =============================
+// FUNCION PARA CAMBIAR TABLA
+// =============================
+function mostrarTabla(tipo) {
+
+    // Ocultar todas
+    $(".table-responsive").hide();
+
+    // Mostrar tabla elegida
+    let idDiv = "tabla-" + tipo;
+    $("#" + idDiv).show();
+
+    // Recalcular total
+    calcularTotal(idDiv);
+}
+
+
+// =============================
+// CALCULAR TOTAL DE COSTOS
+// =============================
+function calcularTotal(idDiv) {
+
+    let total = 0;
+
+    // Obtener instancia DataTable correcta
+    let tabla = tablasDT[idDiv];
+
+    if (!tabla) return;
+
+    // Recorrer filas visibles
+    tabla.rows({ search: "applied" }).every(function () {
+        let data = this.data();
+        let costoCol = data[3]; // Columna costo ("S/ 10.50")
+
+        if (costoCol && costoCol !== "-" && costoCol !== null) {
+            let valor = parseFloat(costoCol.replace("S/", "").trim());
+            if (!isNaN(valor)) total += valor;
+        }
+    });
+
+    $("#totalMovimientos").text("Total: S/ " + total.toFixed(2));
+}

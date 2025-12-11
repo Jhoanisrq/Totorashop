@@ -1,3 +1,4 @@
+//../assets/js/modalProducto.js
 function abrirModal(prod) {
     // --- Soporte flexible para distintos nombres de campo ---
     const imagen = prod.imagen || prod.image || prod.imagen_url || prod.imagenUrl || "";
@@ -37,7 +38,9 @@ function abrirModal(prod) {
                 <label><strong>Cantidad:</strong></label>
                 <input type="number" class="modal-quantity" value="1" min="1" max="${stock_total}">
 
-                <button class="modal-add-to-pedido">Agregar al pedido</button>
+                <button class="modal-add-to-pedido" ${stock_total <= 0 ? "disabled" : ""}>
+                    ${stock_total > 0 ? "Agregar al pedido" : "Sin stock"}
+                </button>
             </div>
         </div>
     `;

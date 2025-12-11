@@ -60,7 +60,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 0 15px;
-    background-color: #cde9eb;
+    background-color: #b1fac1;
 }
 
 .sign-in-container .container-input input, .sign-up-container .container-input input {
@@ -91,12 +91,12 @@ body {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 5px;
-    color: whitesmoke;
-    background-color: #00c4cc;
+    color: rgb(48, 47, 47);
+    background-color: #b1fac1;
 }
 
 .sign-in-container .boton:hover, .sign-up-container .boton:hover {
-    background-color: #00a0a6;
+    background-color: #3d9651;
 }
 
 .sign-in-container img, .sign-up-container img {
